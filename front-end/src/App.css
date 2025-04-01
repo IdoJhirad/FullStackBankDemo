@@ -1,0 +1,16 @@
+#root {
+  max-width: 100%;
+  margin: 0 auto;
+  text-align: center;
+}
+
+button {
+  padding: 0.6rem 1.2rem;
+  font-size: 1rem;
+  cursor: pointer;
+  background-color: #1976d2; 
+  color: #fff;
+  transition: background-color 0.3s ease;
+}
+
+

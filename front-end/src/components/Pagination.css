@@ -1,0 +1,19 @@
+.pagination-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+  
+  .pagination-container button {
+    padding: 0.6rem 1.2rem;
+    font-size: 1rem;
+    cursor: pointer;
+    background-color: #1976d2; 
+    color: #fff;
+    transition: background-color 0.3s ease;
+  }
+  
+  .pagination-container select {
+    margin-left: 1rem;
+  }
+  

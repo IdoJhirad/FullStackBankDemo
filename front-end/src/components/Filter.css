@@ -1,0 +1,67 @@
+/* Filter.css */
+
+/* Container for the entire filter form */
+.filter-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  
+    /* Optional: center the form and style it like a card */
+    max-width: 600px;
+    margin: 1rem auto;
+    padding: 1rem;
+    
+    background-color: #f8f8f8; /* Light background */
+    border: 1px solid #ccc;    /* Light gray border */
+    border-radius: 8px;        /* Rounded corners */
+  
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Each row has multiple label/input combos horizontally */
+  .filter-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: space-around; 
+  }
+  
+  /* Every label in a row is grouped with its field */
+  .filter-row label {
+    display: flex;
+    flex-direction: column;
+    font-weight: 600;
+  }
+  
+  /* Provide some spacing for the text above the inputs */
+  .filter-row label span {
+    margin-bottom: 0.25rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+  }
+  
+  /* Basic styling for inputs/selects */
+  .filter-row input,
+  .filter-row select {
+    font-size: 0.9rem;
+    padding: 0.3rem 0.4rem;
+  }
+  
+  /* Button row aligned in the center */
+  .filter-actions {
+    text-align: center;
+  }
+  
+  /* Styling the Filter button */
+  .filter-actions button {
+    padding: 0.6rem 1.2rem;
+    font-size: 1rem;
+    cursor: pointer;
+    background-color: #1976d2; 
+    color: #fff;
+    transition: background-color 0.3s ease;
+  }
+  .filter-actions button:hover {
+    background-color: #1565c0; 
+  }
+  

@@ -1,0 +1,55 @@
+/* TransactionForm.css */
+
+/* 1) Make the form use a responsive grid layout */
+.transaction-form {
+    display: grid;
+    /* Repeat as many columns as will fit, each at least 200px wide */
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem; /* spacing between columns and rows */
+  
+    max-width: 800px;  /* optional limit for overall width */
+    margin: 1rem auto; /* centers the form horizontally */
+    
+    background-color: #f8f8f8; /* Light background */
+    border: 1px solid #ccc;    /* Light gray border */
+    border-radius: 8px;  
+    padding: 1rem;
+  }
+  
+  /* 2) Each 'form-row' is just a single grid cell */
+  .transaction-form .form-row {
+    display: flex;
+    flex-direction: column; /* label above the input */
+  }
+  
+  /* 3) Some basic label and input styling */
+  .transaction-form label {
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+  }
+  
+  .transaction-form input,
+  .transaction-form select {
+    padding: 0.4rem;
+    font-size: 1rem;
+  }
+  
+  /* 4) Title can span the full width of the form */
+  .transaction-form h2 {
+    grid-column: 1 / -1; /* span all columns */
+    margin: 0 0 0.5rem 0;
+    text-align: center;  /* optional: center the title text */
+  }
+  
+  /* 5) The submit button also spans all columns, centered at the bottom */
+  .transaction-form button {
+    grid-column: 1 / -1;      /* span all columns */
+    justify-self: center;     /* center horizontally */
+    padding: 0.6rem 1.2rem;
+    font-size: 1rem;
+    cursor: pointer;
+    background-color: #1976d2; 
+    color: #fff;
+    transition: background-color 0.3s ease;
+  }
+  
