@@ -7,6 +7,7 @@ import {TransactionFields ,TableHeaders } from '../config.js'
 import { Filter } from './components/Filter.jsx'
 import { Pagination } from './components/Pagination.jsx'
 import { Layout } from './Layout/Layout.jsx';
+
 function App() {
 
   const [showPostForm, setShowPostForm] = useState(false);
@@ -40,8 +41,8 @@ function App() {
     setGetTransactionError(null);
 
     try {
-     
-      const resp = await apiClient.get(`${import.meta.env.VITE_API_GET_TRANSACTION}`,{
+
+        const resp = await apiClient.get(`${import.meta.env.VITE_API_GET_TRANSACTION}`,{
         params: {
           isDeleted: filters.isDeleted,
           isEdited: filters.isEdited,
@@ -53,31 +54,31 @@ function App() {
           pageNumber: filters.pageNumber,
           pageSize: filters.pageSize
         }
-    })
+    });
     if(resp.status == 200) {
       setTransactionsData(resp.data);
-    }
-    else {
+    } else {
       setGetTransactionError("somthing went wrong ");
     }
-  }
-  catch(err){
-    if (err.response) {
-      console.error("Status:", err.response.status);
-      console.error("Data:", err.response.data);
-    } else if (err.request) {
-      // Request was made but no response received
-      console.error("No response received:", err.request);
-    } else {
-      // Something else happened while setting up the request
-      console.error("Error message:", err.message);
-    }
-    setGetTransactionError("somthing went worng");
+  } catch(err) {
+
+      if (err.response) {
+        console.error("Status:", err.response.status);
+        console.error("Data:", err.response.data);
+      } else if (err.request) {
+        // Request was made but no response received
+        console.error("No response received:", err.request);
+      } else {
+        // Something else happened while setting up the request
+        console.error("Error message:", err.message);
+      }
+      setGetTransactionError("somthing went worng");
   } 
   finally {
     setTransactionLoading(false); 
   }
 }
+
 const handleInputChange = (e) => {
   const { name, value, type, checked } = e.target;
   setFilters((prev) => ({
@@ -112,7 +113,6 @@ const handleFilterSubmit = (e) => {
       }
 
       try {
-
         const response = await apiClient.post(endpoint, data);
         if(response.status == 201)
         {
@@ -122,34 +122,28 @@ const handleFilterSubmit = (e) => {
         }
         setShowPostForm(false);
         getTransaction();
-      }
-        catch (err) {
+
+      } catch (err) {
           console.log("Full error response:", err.response);
-        
           if (err.response) {
 
             const data = err.response.data;
-
+            
             if (Array.isArray(data)) {
-              console.log("you are in the first");
               const messages = data
                 .map((item) => item.description || JSON.stringify(item))
                 .join(" ");
                 setPostErrorMessage(messages);
+
               //if the error is an object
-            } else if (typeof data === "object" && data !== null) {
-              console.log("you are in the in the second");
-              
+            } else if (typeof data === "object" && data !== null) {   
               if (data.errors) {
-                console.log("you are in the second firs");
                 // Flatten them into one string
                 const flattened = Object.entries(data.errors)
                   .map(([field, msgs]) => `${msgs.join(", ")
                   }`)
                   .join("\n");
                   setPostErrorMessage(flattened);
-                
-  
             }
             else {
               if(err.response.status == 401){
@@ -157,7 +151,6 @@ const handleFilterSubmit = (e) => {
               } else{
                 data.status ?  setPostErrorMessage(String(data.status)):  setPostErrorMessage("An unexpected error occurred.");;
               }
-              console.log("you are in the third");
             }
           } else {
             console.error("Error setting up request:", err.message);
@@ -168,7 +161,6 @@ const handleFilterSubmit = (e) => {
     }
     const handlePageChange = (newPage) => {
       setFilters((prev) => ({ ...prev, pageNumber: newPage }));
-      //getTransaction();
     };
 
     const handlePageSizeChange = (newSize) => {
