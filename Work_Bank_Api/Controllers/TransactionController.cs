@@ -140,8 +140,12 @@ namespace Work_Bank_Api.Controllers
             {
                 return BadRequest(ModelState);
             }
-
-            await _transactionRepo.DeleteTransactionAsync(id);
+            
+            var transaction = await _transactionRepo.DeleteTransactionAsync(id);
+            if (transaction == null)
+            {
+                return NotFound("Transaction not found.");
+            }
             return NoContent();
         }
 

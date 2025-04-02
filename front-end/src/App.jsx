@@ -39,9 +39,7 @@ function App() {
   const getTransaction = async() => {
     setTransactionLoading(true);
     setGetTransactionError(null);
-
     try {
-
         const resp = await apiClient.get(`${import.meta.env.VITE_API_GET_TRANSACTION}`,{
         params: {
           isDeleted: filters.isDeleted,
@@ -90,7 +88,7 @@ const handleInputChange = (e) => {
 const handleFilterSubmit = (e) => {
     e.preventDefault();
     setFilters((filter) => ({ ...filter, pageNumber: 1 }));
-    //getTransaction();
+    
   }
 
   const handleTransacationSubmit = async (data) => {
@@ -167,6 +165,30 @@ const handleFilterSubmit = (e) => {
       setFilters((prev) => ({ ...prev, pageSize: newSize, pageNumber: 1 }));
     };
 
+    const onTransactionDelete = async (data) => {     
+      try {
+        const response = await apiClient.delete(`${import.meta.env.VITE_API_GET_TRANSACTION}/${data}`);
+        if(response.status == 204)
+        {
+          getTransaction();
+        } else {
+          setGetTransactionError(`delete faild`);
+        } 
+        getTransaction();
+      } catch (err) {
+        if(err.response) {
+          if(err.response.status == 404) {
+            setGetTransactionError("transaction not found.")
+          } else {
+            console.log(err.response);
+            setGetTransactionError("somthing went worng");
+          }
+        } else {
+          setGetTransactionError("somthing went worng");
+        }
+      }
+    }
+    
   return (
     <Layout>
     <div>
@@ -190,7 +212,7 @@ const handleFilterSubmit = (e) => {
       
       {transactionLoading && <p>transactionLoading...</p>}
       {getTransactionError && <p>Error: {getTransactionError}</p>}
-      {transactionsData.length > 0 && <GenericTable tableHeaders={TableHeaders} data={transactionsData}/>}
+      {transactionsData.length > 0 && <GenericTable tableHeaders={TableHeaders} data={transactionsData} onDelete={onTransactionDelete}/>}
       
       </div>
     </Layout>

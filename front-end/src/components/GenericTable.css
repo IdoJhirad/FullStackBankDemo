@@ -16,3 +16,16 @@
     font-weight: bold;
   }
   
+  .generic-table td button {
+    background-color: #e74c3c;
+    color: #fff;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1rem;
+  }
+  
+  .generic-table td button:hover {
+    background-color: #c0392b;
+  }

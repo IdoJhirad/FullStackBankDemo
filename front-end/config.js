@@ -69,4 +69,5 @@ export const TransactionFields = [
     "Status",
     "Is Edited",
     "Is Deleted",
+    "Actions"
   ];

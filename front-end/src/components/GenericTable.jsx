@@ -1,6 +1,20 @@
 import './GenericTable.css';
 
-export function GenericTable({ tableHeaders, data }) {
+export function GenericTable({ tableHeaders, data, onDelete }) {
+
+     function handleDeleteTdClick(item) {
+      if(item.isDeleted) {
+        alert("This transaction is already deleted.");
+        return;
+      }
+      const confirmed = window.confirm(
+        `Are you sure you want to delete transaction #${item.id}?`
+      );
+      if (confirmed) {
+         onDelete(item.id);
+      }
+    }
+
     return (
       <div className='generic-table'>
         <div>
@@ -14,6 +28,7 @@ export function GenericTable({ tableHeaders, data }) {
               <col style={{ width: "10%" }} />
               <col style={{ width: "10%" }} />
               <col style={{ width: "10%" }} />
+              <col style={{ width: "5%" }} />
               <col style={{ width: "5%" }} />
               <col style={{ width: "5%" }} />
               <col style={{ width: "5%" }} />
@@ -41,6 +56,7 @@ export function GenericTable({ tableHeaders, data }) {
                   <td>{item.status}</td>
                   <td>{item.isEdited ? "Yes" : "No"}</td>
                   <td>{item.isDeleted ? "Yes" : "No"}</td>
+                  <td><button  onClick={() => handleDeleteTdClick(item)}>Delete Transaction</button></td>
                 </tr>
               ))}
             </tbody>
