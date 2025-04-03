@@ -28,7 +28,7 @@ export function GenericTable({ tableHeaders, data, onDelete }) {
               <col style={{ width: "10%" }} />
               <col style={{ width: "10%" }} />
               <col style={{ width: "10%" }} />
-              <col style={{ width: "5%" }} />
+              <col style={{ width: "10%" }} />
               <col style={{ width: "5%" }} />
               <col style={{ width: "5%" }} />
               <col style={{ width: "5%" }} />

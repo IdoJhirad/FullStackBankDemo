@@ -103,12 +103,7 @@ const handleFilterSubmit = (e) => {
         setPostErrorMessage("need to choos deposite ot withdrawal");
         return;
       }
-      const now = new Date();
-      const selectedDate = new Date(data.birthDate);
-      if (selectedDate > now) {
-        setPostErrorMessage("Birth date cannot be in the future");
-        return;
-      }
+
 
       try {
         const response = await apiClient.post(endpoint, data);

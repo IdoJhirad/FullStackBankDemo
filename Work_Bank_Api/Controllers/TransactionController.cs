@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Work_Bank_Api.Dtos;
 using Work_Bank_Api.Intarfaces;
 using Work_Bank_Api.Models;
+using Work_Bank_Api.Repos;
 using Work_Bank_Api.Utils;
 
 namespace Work_Bank_Api.Controllers
@@ -25,7 +26,7 @@ namespace Work_Bank_Api.Controllers
         [HttpGet]
         public async Task<IActionResult> GetTransaction([FromQuery]QueryObject query)
         {
-            if(!ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }

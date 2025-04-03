@@ -10,6 +10,8 @@ export const TransactionForm = ({fields, onSubmit, title, submitText}) => {
         })
     );
 
+    const [formErrors , setFormErrors] = useState({});
+
     const handleChange =(e) => {
         const {name, value} = e.target;
         setFormData({...formData, [name]:value });
@@ -17,8 +19,28 @@ export const TransactionForm = ({fields, onSubmit, title, submitText}) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        onSubmit(formData);
+        const validateFormRes = validateForm();
+        if(Object.keys(validateFormRes).length > 0) {
+          setFormErrors(validateForm);
+        } else {
+          setFormErrors({});
+          onSubmit(formData);
+        }
     };
+
+    const validateForm = () => {
+      let errors = {};
+      fields.forEach((field)=>{
+        const value = formData[field.name];
+        if(field.validate) {
+          const errorMessage = (field.validate(value));
+          if(errorMessage) {
+            errors[field.name] = errorMessage;
+          }
+        }
+      }) 
+      return errors;
+    }
 
     return (
         <>
@@ -55,6 +77,7 @@ export const TransactionForm = ({fields, onSubmit, title, submitText}) => {
                 
                 />
                 )}
+                 { formErrors[field.name] && (<p className="error">{formErrors[field.name]}</p>)}
             </div>
           ))}
         <button

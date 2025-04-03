@@ -48,4 +48,8 @@
     color: #fff;
     transition: background-color 0.3s ease;
   }
+
+  .error {
+    color: red;
+  }
   
