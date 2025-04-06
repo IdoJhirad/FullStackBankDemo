@@ -1,4 +1,5 @@
 
+using Asp.Versioning;
 using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -17,15 +18,27 @@ builder.Services.AddScoped<ITransactionRepo, TransactionRepo>();
 
 
 builder.Services.AddControllers();
+
+//versioning
+builder.Services.AddApiVersioning(options =>
+{
+    options.DefaultApiVersion = new ApiVersion(1, 0);
+    options.AssumeDefaultVersionWhenUnspecified = true;
+    options.ReportApiVersions = true;  
+}).AddApiExplorer(options =>
+{
+    options.GroupNameFormat = "'v'VVV";
+    options.SubstituteApiVersionInUrl = true;
+}); ;
+
+
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(options =>
 {
-    options.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo
-    {
-        Title = "My API",
-        Version = "v1"
-    });
+    options.SwaggerDoc("v1", new OpenApiInfo { Title = "My API - V1", Version = "v1.0" });
+    options.SwaggerDoc("v2", new OpenApiInfo { Title = "My API - V2", Version = "v2.0" });
 
     // Optionally include XML docs
     var baseDirectory = AppContext.BaseDirectory;
@@ -88,6 +101,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI(c =>
     {
         c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API v1");
+        c.SwaggerEndpoint("/swagger/v2/swagger.json", "My API v2");
     });
 
 }

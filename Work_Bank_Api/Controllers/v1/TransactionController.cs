@@ -1,9 +1,12 @@
 ﻿
 
-namespace Work_Bank_Api.Controllers
+using Asp.Versioning;
+
+namespace Work_Bank_Api.Controllers.v1
 {
 
-    [Route("api/transaction")]
+    [Route("api/v{version:apiVersion}/transaction")]
+    [ApiVersion("1.0")]
     [ApiController]
     public class TransactionController : ControllerBase
     {
@@ -29,9 +32,9 @@ namespace Work_Bank_Api.Controllers
         [HttpGet]
         [ProducesResponseType(typeof(TransactionDto), 200)]
         [ProducesResponseType(400)]
-        public async Task<IActionResult> GetTransaction([FromQuery]QueryObject query)
+        public async Task<IActionResult> GetTransaction([FromQuery] QueryObject query)
         {
-          
+
             var transactions = await _transactionRepo.GetTransactionAsync(query);
             //mapper
             var transactionDtos = _mapper.Map<List<TransactionDto>>(transactions);
@@ -50,9 +53,9 @@ namespace Work_Bank_Api.Controllers
         [HttpGet("{id:int}")]
         [ProducesResponseType(typeof(TransactionDto), 200)]
         [ProducesResponseType(400)]
-        public async Task<IActionResult> GetTransactionById([FromRoute]int id)
+        public async Task<IActionResult> GetTransactionById([FromRoute] int id)
         {
-        
+
             var transaction = await _transactionRepo.GetTransactionByIdAsync(id);
             if (transaction == null)
             {
@@ -75,7 +78,7 @@ namespace Work_Bank_Api.Controllers
         [ProducesResponseType(typeof(TransactionDto), 201)]
         [ProducesResponseType(400)]
         [ProducesResponseType(401)]
-        public async Task<IActionResult> Deposite([FromBody]CreateTtansactionDto dto)
+        public async Task<IActionResult> Deposite([FromBody] CreateTtansactionDto dto)
         {
 
             //var transaction = dto.FromDtoToModel();
@@ -92,7 +95,7 @@ namespace Work_Bank_Api.Controllers
             var tokenResp = await _httpService.CreateToken(tokenData);
             if (tokenResp.Code != 201)
             {
-                return Unauthorized();    
+                return Unauthorized();
             }
 
             var depositeResp = await _httpService.CreateDeposite(new TransferData
@@ -103,14 +106,14 @@ namespace Work_Bank_Api.Controllers
 
             if (depositeResp.Code == 201)
             {
-                   transaction.Status = TransactionStatus.Completed;
+                transaction.Status = TransactionStatus.Completed;
             }
             else
             {
                 transaction.Status = TransactionStatus.Failed;
             }
-            
-            await _transactionRepo.AddDepositAsync(transaction);     
+
+            await _transactionRepo.AddDepositAsync(transaction);
             return CreatedAtAction(nameof(GetTransactionById), new { id = transaction.Id }, _mapper.Map<TransactionDto>(transaction));
         }
 
@@ -177,7 +180,7 @@ namespace Work_Bank_Api.Controllers
         [ProducesResponseType(404)]
         public async Task<IActionResult> DeleteTransaction([FromRoute] int id)
         {
-            
+
             var transaction = await _transactionRepo.DeleteTransactionAsync(id);
             if (transaction == null)
             {
