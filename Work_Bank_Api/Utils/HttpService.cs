@@ -1,7 +1,4 @@
 ﻿
-using Work_Bank_Api.Intarfaces;
-using Work_Bank_Api.Models;
-
 namespace Work_Bank_Api.Utils
 {
     public class CreateTokenData
@@ -23,7 +20,7 @@ namespace Work_Bank_Api.Utils
     public class TransferResponse
     {
         public int Code {  get; set; }
-        public TransactionStatus Status { get; set; }
+        public Model.Enums.TransactionStatus Status { get; set; }
     }
     public class HttpService : IHttpService
     {

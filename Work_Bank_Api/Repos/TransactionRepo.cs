@@ -1,9 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Work_Bank_Api.Db;
-using Work_Bank_Api.Intarfaces;
-using Work_Bank_Api.Models;
-using Work_Bank_Api.Utils;
-
+﻿
 namespace Work_Bank_Api.Repos
 {
     public class TransactionRepo : ITransactionRepo

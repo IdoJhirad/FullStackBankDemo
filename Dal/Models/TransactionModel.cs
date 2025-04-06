@@ -1,5 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel.DataAnnotations;
+﻿
+
+
+
 
 namespace Work_Bank_Api.Models
 {
@@ -38,16 +40,5 @@ namespace Work_Bank_Api.Models
 
         public bool IsDeleted { get; set; }  = false;
     }
-    public enum TransactionType
-    {
-        Deposit = 0,
-        Withdrawal = 1,
-       
-    }
-    public enum TransactionStatus
-    {
-        Pending = 0,
-        Completed = 1,
-        Failed = 2
-    }
+  
 }

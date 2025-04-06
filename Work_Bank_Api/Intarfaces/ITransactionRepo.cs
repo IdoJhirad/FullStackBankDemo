@@ -1,6 +1,4 @@
-﻿using Work_Bank_Api.Models;
-using Work_Bank_Api.Utils;
-
+﻿
 namespace Work_Bank_Api.Intarfaces
 {
     public interface ITransactionRepo
