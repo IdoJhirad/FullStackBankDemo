@@ -1,17 +1,23 @@
 ﻿global using FluentValidation;
 global using Microsoft.EntityFrameworkCore;
-global using Work_Bank_Api.Db;
 global using Work_Bank_Api.Intarfaces;
 global using Work_Bank_Api.Repos;
 global using Work_Bank_Api.Utils;
 global using Service.Validators;
 global using FluentValidation.AspNetCore;
-global using System.Linq.Expressions;
-global using Work_Bank_Api.Dtos;
-global using Work_Bank_Api.Models;
 global using Model.Enums;
 global using Microsoft.AspNetCore.Mvc;
 global using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 global using AutoMapper;
 global using HealthChecks.UI.Client;
 global using Microsoft.Extensions.Diagnostics.HealthChecks;
+global using Asp.Versioning;
+global using Service.Services;
+global using Work_Bank_api.Service.Services;
+global using Work_Bank_Api.Model.Dtos;
+global using Work_Bank_api.Dal.Transaction.Models;
+global using Microsoft.OpenApi.Models;
+global using Work_Bank_api.Model.Dtos;
+global using Work_Bank_api.Dal.Transaction.Repositories;
+global using Work_Bank_Api.Service.Services.Utils;
+

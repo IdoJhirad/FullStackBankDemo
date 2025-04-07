@@ -37,8 +37,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Model\Model.csproj" />
-    <ProjectReference Include="..\Service\Service.csproj" />
+    <ProjectReference Include="..\Model\Work_Bank_api.Model.csproj" />
+    <ProjectReference Include="..\Service\Work_Bank_api.Service.csproj" />
   </ItemGroup>
 
 

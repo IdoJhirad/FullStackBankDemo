@@ -1,6 +1,6 @@
 ﻿
 
-using Asp.Versioning;
+
 
 namespace Work_Bank_Api.Controllers.v1
 {
@@ -30,14 +30,14 @@ namespace Work_Bank_Api.Controllers.v1
         /// <response code="200">sucsess </response>
         /// <response code="400">Bad request </response>
         [HttpGet]
-        [ProducesResponseType(typeof(TransactionDto), 200)]
+        [ProducesResponseType(typeof(DTOTransaction), 200)]
         [ProducesResponseType(400)]
         public async Task<IActionResult> GetTransaction([FromQuery] QueryObject query)
         {
 
             var transactions = await _transactionRepo.GetTransactionAsync(query);
             //mapper
-            var transactionDtos = _mapper.Map<List<TransactionDto>>(transactions);
+            var transactionDtos = _mapper.Map<List<DTOTransaction>>(transactions);
 
             return Ok(transactionDtos);
         }
@@ -45,13 +45,13 @@ namespace Work_Bank_Api.Controllers.v1
         /// <summary>
         ///  Get Transaction by id
         /// </summary>
-        /// <param name="id">id of tensaction</param>
+        /// <param name="id">id of transaction</param>
         /// <returns> transaction Dto </returns>
         /// <response code="200">sucsess </response>
         /// <response code="400">Bad request </response>
         /// <response code="404"> Not Found </response>
         [HttpGet("{id:int}")]
-        [ProducesResponseType(typeof(TransactionDto), 200)]
+        [ProducesResponseType(typeof(DTOTransaction), 200)]
         [ProducesResponseType(400)]
         public async Task<IActionResult> GetTransactionById([FromRoute] int id)
         {
@@ -62,7 +62,7 @@ namespace Work_Bank_Api.Controllers.v1
                 return NotFound("transaction not found");
             }
             //return Ok(transaction.FromModelToDto());
-            return Ok(_mapper.Map<TransactionDto>(transaction));
+            return Ok(_mapper.Map<DTOTransaction>(transaction));
         }
 
 
@@ -75,10 +75,10 @@ namespace Work_Bank_Api.Controllers.v1
         /// <response code="400">Bad request </response>
         /// <response code="500"> server error </response>
         [HttpPost("deposite")]
-        [ProducesResponseType(typeof(TransactionDto), 201)]
+        [ProducesResponseType(typeof(DTOTransaction), 201)]
         [ProducesResponseType(400)]
         [ProducesResponseType(401)]
-        public async Task<IActionResult> Deposite([FromBody] CreateTtansactionDto dto)
+        public async Task<IActionResult> Deposite([FromBody] DTORequestTransaction dto)
         {
 
             //var transaction = dto.FromDtoToModel();
@@ -114,7 +114,7 @@ namespace Work_Bank_Api.Controllers.v1
             }
 
             await _transactionRepo.AddDepositAsync(transaction);
-            return CreatedAtAction(nameof(GetTransactionById), new { id = transaction.Id }, _mapper.Map<TransactionDto>(transaction));
+            return CreatedAtAction(nameof(GetTransactionById), new { id = transaction.Id }, _mapper.Map<DTOTransaction>(transaction));
         }
 
         /// <summary>
@@ -126,10 +126,10 @@ namespace Work_Bank_Api.Controllers.v1
         /// <response code="400">Bad request </response>
         /// <response code="500"> server error </response>
         [HttpPost("withdrawal")]
-        [ProducesResponseType(typeof(TransactionDto), 201)]
+        [ProducesResponseType(typeof(DTOTransaction), 201)]
         [ProducesResponseType(400)]
         [ProducesResponseType(401)]
-        public async Task<IActionResult> Withdrawal([FromBody] CreateTtansactionDto dto)
+        public async Task<IActionResult> Withdrawal([FromBody] DTORequestTransaction dto)
         {
 
             var transaction = _mapper.Map<TransactionModel>(dto);
@@ -163,7 +163,7 @@ namespace Work_Bank_Api.Controllers.v1
             }
 
             await _transactionRepo.AddWithdrawalAsync(transaction);
-            return CreatedAtAction(nameof(GetTransactionById), new { id = transaction.Id }, _mapper.Map<TransactionDto>(transaction));
+            return CreatedAtAction(nameof(GetTransactionById), new { id = transaction.Id }, _mapper.Map<DTOTransaction>(transaction));
         }
 
         //[HttpPut("{id:int}")]
@@ -174,7 +174,7 @@ namespace Work_Bank_Api.Controllers.v1
         /// <param name="id"> the transaction id</param>
         /// <returns></returns>
         [HttpDelete("{id:int}")]
-        [ProducesResponseType(typeof(TransactionDto), 204)]
+        [ProducesResponseType(typeof(DTOTransaction), 204)]
         [ProducesResponseType(400)]
         [ProducesResponseType(401)]
         [ProducesResponseType(404)]

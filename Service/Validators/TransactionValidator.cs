@@ -1,7 +1,7 @@
 ﻿
 namespace Service.Validators
 {
-    public class TransactionValidator : AbstractValidator<Work_Bank_Api.Dtos.CreateTtansactionDto>
+    public class TransactionValidator : AbstractValidator<DTORequestTransaction>
     {
         public TransactionValidator()
         {

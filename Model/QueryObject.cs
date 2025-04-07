@@ -1,7 +1,4 @@
-﻿
-
-
-namespace Work_Bank_Api.Utils
+﻿namespace Work_Bank_Api.Utils
 {
     public class QueryObject
     {

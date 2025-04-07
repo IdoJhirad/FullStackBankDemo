@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.12.35707.178
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Work_Bank_Api", "Work_Bank_Api.csproj", "{BB703533-8CC9-410E-8977-C54EC477B968}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Work_Bank_Api.Webapi", "Work_Bank_Api.Webapi.csproj", "{BB703533-8CC9-410E-8977-C54EC477B968}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Service", "..\Service\Service.csproj", "{0019D539-92E1-418A-AD83-FF807FA29F7C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Work_Bank_api.Service", "..\Service\Work_Bank_api.Service.csproj", "{0019D539-92E1-418A-AD83-FF807FA29F7C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Model", "..\Model\Model.csproj", "{B35EA116-3A92-42B9-B8D7-5DB94AEF22CC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Work_Bank_api.Model", "..\Model\Work_Bank_api.Model.csproj", "{B35EA116-3A92-42B9-B8D7-5DB94AEF22CC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dal", "..\Dal\Dal.csproj", "{2B457A7C-AB17-403E-9B8D-485EDE2503BA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Work_Bank_api.Dal", "..\Dal\Work_Bank_api.Dal.csproj", "{2B457A7C-AB17-403E-9B8D-485EDE2503BA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

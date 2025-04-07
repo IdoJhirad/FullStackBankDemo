@@ -1,4 +1,5 @@
 ﻿
+
 namespace Work_Bank_Api.Intarfaces
 {
     public interface ITransactionRepo

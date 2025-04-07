@@ -1,5 +1,5 @@
 ﻿
-namespace Work_Bank_Api.Utils
+namespace Work_Bank_Api.Service.Services.Utils
 {
     public static class Exstention
     {

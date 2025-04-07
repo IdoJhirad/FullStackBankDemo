@@ -1,6 +1,4 @@
-﻿
-
-namespace Model.Enums
+﻿namespace Model.Enums
 {
     /// <summary>
     /// TransactionType

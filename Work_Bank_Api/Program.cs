@@ -1,6 +1,4 @@
 
-using Asp.Versioning;
-using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,8 +11,14 @@ builder.Services.AddControllers()
 
 // Add services to the container.
 builder.Services.AddLogging();
-builder.Services.AddScoped<IHttpService,HttpService>();
+
+builder.Services.AddScoped<IHttpService, HttpService>();
 builder.Services.AddScoped<ITransactionRepo, TransactionRepo>();
+
+//for v2
+builder.Services.AddScoped<ITransactionRepository, TransactionRepository>();
+builder.Services.AddScoped<ITransactionService, TransactionService>();
+builder.Services.AddScoped<IBankService, BankService>();
 
 
 builder.Services.AddControllers();
@@ -76,6 +80,24 @@ builder.Services.AddCors(options =>
 //validation
 builder.Services.AddValidatorsFromAssemblyContaining<TransactionValidator>();
 builder.Services.AddFluentValidationAutoValidation();
+builder.Services.AddControllers().ConfigureApiBehaviorOptions(options =>
+{
+    options.InvalidModelStateResponseFactory = context =>
+    {
+        var errors = string.Join('\n', context.ModelState.Values
+            .Where(v => v.Errors.Count > 0)
+            .SelectMany(v => v.Errors)
+            .Select(e => e.ErrorMessage));
+
+        return new BadRequestObjectResult(new DTOResponse<string>
+        {
+            Code = 400,
+            Status = "One or more validation errors occurred.",
+            Data = errors
+        });
+
+    };
+});
 
 builder.Services.AddHealthChecks()
     .AddSqlServer(builder.Configuration.GetConnectionString("DB_Connection")!, healthQuery: "select 1", name: "SQL Server", failureStatus: HealthStatus.Unhealthy, tags: new[] { "Feedback", "Database" });

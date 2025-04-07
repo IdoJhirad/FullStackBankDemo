@@ -14,8 +14,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Dal\Dal.csproj" />
-    <ProjectReference Include="..\Model\Model.csproj" />
+    <ProjectReference Include="..\Dal\Work_Bank_api.Dal.csproj" />
+    <ProjectReference Include="..\Model\Work_Bank_api.Model.csproj" />
   </ItemGroup>
 
 </Project>

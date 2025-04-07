@@ -1,16 +1,11 @@
-﻿
-
-
-
-
-namespace Service.Configuration
+﻿namespace Service.Configuration
 {
     public class MappingProfile : Profile
     {
         public MappingProfile()
         {
-            CreateMap<TransactionModel, TransactionDto>();
-            CreateMap<CreateTtansactionDto, TransactionModel>();
+            CreateMap<TransactionModel, DTOTransaction>();
+            CreateMap<DTORequestTransaction, TransactionModel>();
         }
     }
 }

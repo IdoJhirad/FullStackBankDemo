@@ -1,14 +1,9 @@
-﻿
-
-
-
-
-namespace Work_Bank_Api.Models
+﻿namespace Work_Bank_api.Dal.Transaction.Models
 {
     public class TransactionModel
     {
         public int Id { get; set; }
-        
+
         [MaxLength(20, ErrorMessage = " Name Should Contanin no more than 20 Character.")]
         [RegularExpression("^[\\u05D0-\\u05EA\\s'-]{1,20}$")]
         public string HebrewName { get; set; } = string.Empty;
@@ -38,7 +33,7 @@ namespace Work_Bank_Api.Models
 
         public bool IsEdited { get; set; } = false;
 
-        public bool IsDeleted { get; set; }  = false;
+        public bool IsDeleted { get; set; } = false;
     }
-  
+
 }

@@ -1,9 +1,16 @@
 ﻿
-namespace Work_Bank_Api.Utils
+namespace Service.Services
 {
+    public interface IHttpService
+    {
+        Task<TokenResponse> CreateToken(CreateTokenData data);
+        Task<TransferResponse> CreateDeposite(TransferData data);
+        Task<TransferResponse> CreateWithdrawal(TransferData data);
+    }
+
     public class CreateTokenData
     {
-        public string UserID { get; set; } = string.Empty; 
+        public string UserID { get; set; } = string.Empty;
         public string SecretId { get; set; } = string.Empty;
     }
     public class TokenResponse
@@ -19,7 +26,7 @@ namespace Work_Bank_Api.Utils
     }
     public class TransferResponse
     {
-        public int Code {  get; set; }
+        public int Code { get; set; }
         public Model.Enums.TransactionStatus Status { get; set; }
     }
     public class HttpService : IHttpService
@@ -40,12 +47,12 @@ namespace Work_Bank_Api.Utils
 
         public async Task<TransferResponse> CreateDeposite(TransferData data)
         {
-           
+
             try
             {
                 string url = _baseUrl + _configuration["HttpClient:CreateDepositeUrl"];
                 var resp = await _client.PostAsJsonAsync(url, data);
-                
+
                 if (resp.IsSuccessStatusCode)
                 {
                     var depositeResp = await resp.Content.ReadFromJsonAsync<TransferResponse>();
@@ -89,12 +96,12 @@ namespace Work_Bank_Api.Utils
                 {
                     return new TokenResponse
                     {
-                         Code = (int)response.StatusCode,
-                        Token = null ,
+                        Code = (int)response.StatusCode,
+                        Token = null,
                     };
                 }
-            } 
-            catch(Exception)
+            }
+            catch (Exception)
             {
                 bool isSucsseed = new Random().Next(0, 2) == 1;
                 var resp = new TokenResponse
@@ -124,7 +131,7 @@ namespace Work_Bank_Api.Utils
                     return new TransferResponse { Code = (int)resp.StatusCode, Status = TransactionStatus.Failed };
                 }
             }
-            catch (Exception )
+            catch (Exception)
             // Simulate a response on fail
             {
                 bool isSucsseed = new Random().Next(0, 2) == 1;

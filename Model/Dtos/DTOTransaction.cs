@@ -1,6 +1,6 @@
-﻿namespace Work_Bank_Api.Dtos
+﻿namespace Work_Bank_Api.Model.Dtos
 {
-    public class TransactionDto
+    public class DTOTransaction
     {
         /// <summary>
         /// id of user 
