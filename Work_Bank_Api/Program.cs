@@ -1,6 +1,8 @@
 
 
 var builder = WebApplication.CreateBuilder(args);
+//for db first
+var configuration = builder.Configuration;
 
 builder.Services.AddControllers()
     .AddJsonOptions(options =>
@@ -12,7 +14,8 @@ builder.Services.AddControllers()
 // Add services to the container.
 builder.Services.AddLogging();
 
-builder.Services.AddScoped<IHttpService, HttpService>();
+builder.Services.AddHttpClient<IHttpService,HttpService>();
+//builder.Services.AddScoped<IHttpService, HttpService>();
 builder.Services.AddScoped<ITransactionRepo, TransactionRepo>();
 
 //for v2

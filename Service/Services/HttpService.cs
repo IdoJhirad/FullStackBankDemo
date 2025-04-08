@@ -31,16 +31,16 @@ namespace Service.Services
     }
     public class HttpService : IHttpService
     {
-        private static readonly HttpClient _client = new HttpClient();
-
+        private readonly HttpClient _client;
         private readonly IConfiguration _configuration;
         private readonly string _baseUrl;
         private readonly ILogger<HttpClient> _logger;
-        public HttpService(IConfiguration configuration, ILogger<HttpClient> logger)
+        public HttpService(IConfiguration configuration, ILogger<HttpClient> logger, HttpClient client)
         {
             _configuration = configuration;
             _baseUrl = _configuration["HttpClient:BaseUrl"]!;
             _logger = logger;
+            _client = client;
         }
 
 
