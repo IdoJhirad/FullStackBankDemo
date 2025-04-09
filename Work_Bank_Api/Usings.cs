@@ -1,6 +1,5 @@
 ﻿global using FluentValidation;
 global using Microsoft.EntityFrameworkCore;
-global using Work_Bank_Api.Intarfaces;
 global using Work_Bank_Api.Repos;
 global using Work_Bank_Api.Utils;
 global using Service.Validators;
@@ -20,4 +19,4 @@ global using Microsoft.OpenApi.Models;
 global using Work_Bank_api.Model.Dtos;
 global using Work_Bank_api.Dal.Transaction.Repositories;
 global using Work_Bank_Api.Service.Services.Utils;
-
+global using Work_Bank_Api.Webapi.Repos;

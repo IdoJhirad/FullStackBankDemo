@@ -18,7 +18,7 @@
     }
     public class GenericRepository<TEntity, DbContexRepository> : IGenericRepository< TEntity > where DbContexRepository : DbContext where TEntity : class
     {
-        private readonly DbContexRepository _dbContext;
+        protected readonly DbContexRepository _dbContext;
         public GenericRepository(DbContexRepository dbContex)
         {
             _dbContext = dbContex;

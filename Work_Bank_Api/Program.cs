@@ -1,5 +1,3 @@
-
-
 var builder = WebApplication.CreateBuilder(args);
 //for db first
 var configuration = builder.Configuration;
@@ -31,7 +29,8 @@ builder.Services.AddApiVersioning(options =>
 {
     options.DefaultApiVersion = new ApiVersion(1, 0);
     options.AssumeDefaultVersionWhenUnspecified = true;
-    options.ReportApiVersions = true;  
+    options.ReportApiVersions = true;
+  
 }).AddApiExplorer(options =>
 {
     options.GroupNameFormat = "'v'VVV";

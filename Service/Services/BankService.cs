@@ -80,7 +80,7 @@ namespace Work_Bank_api.Service.Services
                 response.Data = null;
                 
                 return response;
-                //return Unauthorized();
+              
             }
 
             var depositeResp = await _httpService.CreateDeposite(new TransferData
@@ -157,7 +157,19 @@ namespace Work_Bank_api.Service.Services
 
         public async Task<DTOResponse<TransactionModel?>> DeleteTransactionAsync(int id)
         {
-            throw new NotImplementedException();
+            var resp = new DTOResponse<TransactionModel?>();
+            var transaction = await _transactionService.MarkTransactionAsDelete(id);
+            if (transaction == null)
+            {
+                resp.Status = "transaction not found";
+                resp.Data = null;
+                resp.Code = 404;
+                return resp;
+            }
+            resp.Status = "sucsess";
+            resp.Data = null;
+            resp.Code = 200;
+            return resp;
         }
 
         private List<DTOTransaction> FilterData(QueryObject query, IEnumerable<DTOTransaction> transactionsIEnumrable)

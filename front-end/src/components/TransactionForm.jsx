@@ -26,6 +26,7 @@ export const TransactionForm = ({fields, onSubmit, title, submitText}) => {
           setFormErrors({});
           onSubmit(formData);
         }
+        onSubmit(formData);
     };
 
     const validateForm = () => {

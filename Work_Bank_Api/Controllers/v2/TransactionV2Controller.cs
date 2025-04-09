@@ -107,16 +107,12 @@ namespace Work_Bank_Api.Controllers.v2
         [HttpDelete("{id:int}")]
         [ProducesResponseType(400)]
         [ProducesResponseType(401)]
-        [ProducesResponseType(404)]
+        [ProducesResponseType(typeof(DTOResponse<>),404)]
+        [ProducesResponseType(typeof(DTOResponse<>),200)]
         public async Task<IActionResult> DeleteTransaction([FromRoute] int id)
         {
-
-            //var transaction = await _transactionRepo.DeleteTransactionAsync(id);
-            //if (transaction == null)
-            //{
-            //    return NotFound("Transaction not found.");
-            //}
-            return NoContent();
+            var resp = await _bankService.DeleteTransactionAsync(id); 
+            return StatusCode(resp.Code, resp);
         }
     }
 }
